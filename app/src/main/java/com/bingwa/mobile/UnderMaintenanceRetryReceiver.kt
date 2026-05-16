@@ -1,5 +1,4 @@
 package com.bingwa.mobile
-
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -14,7 +13,6 @@ class UnderMaintenanceRetryReceiver : BroadcastReceiver() {
         private const val TAG = "MaintRetryReceiver"
         private const val REQUEST_CODE = 4015
         fun schedule(context: Context) {
-            Log.d(TAG, "Scheduling under maintenance retry")
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, UnderMaintenanceRetryReceiver::class.java)
             val flags = if (Build.VERSION.SDK_INT >= 23) PendingIntent.FLAG_IMMUTABLE else 0
@@ -31,14 +29,8 @@ class UnderMaintenanceRetryReceiver : BroadcastReceiver() {
             alarmManager.cancel(pendingIntent)
         }
     }
-
     override fun onReceive(context: Context, intent: Intent?) {
-        Log.d(TAG, "UnderMaintenanceRetryReceiver triggered")
-        if (!context.getSharedPreferences("app_settings", Context.MODE_PRIVATE).getBoolean("auto_retry", false)) {
-            cancel(context)
-            return
-        }
-        // Retry failed transactions
+        if (!context.getSharedPreferences("app_settings", Context.MODE_PRIVATE).getBoolean("auto_retry", false)) { cancel(context); return }
         RetryWorker(context).run()
         schedule(context)
     }

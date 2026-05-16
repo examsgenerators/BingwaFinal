@@ -1,5 +1,4 @@
 package com.bingwa.mobile
-
 import android.content.Context
 import android.content.Intent
 import org.json.JSONArray
