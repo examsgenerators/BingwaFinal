@@ -11,8 +11,7 @@ class AutomationService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val ussdCode = intent?.getStringExtra("code") ?: return START_NOT_STICKY
         val mode = intent.getStringExtra("mode") ?: "SIMPLE"
-        val phoneNumber = intent.getStringExtra("phoneNumber") ?: ""
-        Log.d(TAG, "Mode: $mode, Code: $ussdCode, Phone: $phoneNumber")
+        Log.d(TAG, "Mode: $mode, Code: $ussdCode")
         if (mode.equals("SIMPLE", true)) dial(ussdCode + Uri.encode("#"))
         else dial(ussdCode.split("*").firstOrNull { it.isNotEmpty() }?.let { it + Uri.encode("#") } ?: (ussdCode + Uri.encode("#")))
         return START_NOT_STICKY

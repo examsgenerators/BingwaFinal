@@ -7,7 +7,6 @@ enum class TransactionStatus(val value: String) {
     FAILED("Failed"),
     CANCELLED("Cancelled"),
     RETRYING("Retrying");
-
     companion object {
         fun fromString(text: String): TransactionStatus {
             return entries.find { it.value.equals(text, ignoreCase = true) } ?: PENDING
