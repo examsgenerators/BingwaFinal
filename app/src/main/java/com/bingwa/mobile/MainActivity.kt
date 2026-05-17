@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+no@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.bingwa.mobile
 
@@ -120,7 +120,7 @@ fun BingwaApp() {
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet(containerColor = CardBg) {
+            ModalDrawerSheet {
                 Spacer(Modifier.height(24.dp))
                 Text("Bingwa Mobile", modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold, fontSize = 20.sp, color = RoseGold)
                 Divider(color = TextGray)
